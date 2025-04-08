@@ -4,11 +4,9 @@ FROM n8nio/n8n:latest
 # Switch to root to install additional dependencies
 USER root
 
-# Update apt and install ffmpeg
-RUN apt-get update \
-    && apt-get install -y ffmpeg \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Install ffmpeg using apk (Alpine’s package manager)
+RUN apk update \
+    && apk add --no-cache ffmpeg
 
 # Switch back to node user
 USER node
